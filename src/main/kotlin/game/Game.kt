@@ -16,7 +16,6 @@ fun getUserChoice(optionsParam: Array<String>): String {
         println("Пожалуйста, введите один из вариантов: ${optionsParam.joinToString(", ")}.")
         val userInput = readLine()
         if (userInput != null && userInput in optionsParam){
-
             isValidChoice = true
             userChoice = userInput
         }
