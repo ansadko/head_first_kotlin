@@ -15,12 +15,12 @@ fun getUserChoice(optionsParam: Array<String>): String {
     while (!isValidChoice){
         println("Пожалуйста, введите один из вариантов: ${optionsParam.joinToString(", ")}.")
         val userInput = readLine()
-        if (userInput !=null && userInput in optionsParam){
+        if (userInput != null && userInput in optionsParam){
 
             isValidChoice = true
             userChoice = userInput
         }
-        if (!isValidChoice) println("Введенено неправильное значение. Попробуйте еще раз")
+        if (!isValidChoice) println("Введенено неправильное значение. Попробуйте еще раз.")
     }
     return (userChoice)
 }
