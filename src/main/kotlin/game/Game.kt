@@ -15,10 +15,9 @@ fun getUserChoice(optionsParam: Array<String>): String {
     while (!isValidChoice){
         println("Пожалуйста, введите один из вариантов: ${optionsParam.joinToString(", ")}.")
         val userInput = readLine()
-        if (userInput != null && userInput in optionsParam){
-
+        if (userInput != null && optionsParam.any { it.equals(userInput.filter { !it.isWhitespace() }, true) }){
             isValidChoice = true
-            userChoice = userInput
+            userChoice = userInput.filter { !it.isWhitespace()}
         }
         if (!isValidChoice) println("Введенено неправильное значение. Попробуйте еще раз.")
     }
@@ -27,12 +26,12 @@ fun getUserChoice(optionsParam: Array<String>): String {
 
 fun printResult(userChoice: String, gameChoice: String) {
     val result: String
-    if (userChoice == gameChoice) result = "Ничья!"
-    else if ((userChoice == "Ножницы" && (gameChoice == "Бумага" || gameChoice == "Ящерица")) ||
-        (userChoice == "Бумага" && (gameChoice == "Камень" || gameChoice == "Спок")) ||
-        (userChoice == "Камень" && (gameChoice == "Ящерица" || gameChoice == "Ножницы")) ||
-        (userChoice == "Ящерица" && (gameChoice == "Спок" || gameChoice == "Бумага")) ||
-        (userChoice == "Спок" && (gameChoice == "Ножницы" || gameChoice == "Камень"))) result = "Ты победил!"
+    if (userChoice.equals(gameChoice, ignoreCase = true)) result = "Ничья!"
+    else if ((userChoice.equals("Ножницы", ignoreCase = true) && (gameChoice == "Бумага" || gameChoice == "Ящерица")) ||
+        (userChoice.equals("Бумага", ignoreCase = true) && (gameChoice == "Камень" || gameChoice == "Спок")) ||
+        (userChoice.equals("Камень", ignoreCase = true) && (gameChoice == "Ящерица" || gameChoice == "Ножницы")) ||
+        (userChoice.equals("Ящерица", ignoreCase = true) && (gameChoice == "Спок" || gameChoice == "Бумага")) ||
+        (userChoice.equals("Спок", ignoreCase = true) && (gameChoice == "Ножницы" || gameChoice == "Камень"))) result = "Ты победил!"
     else result = "Ты проиграл!"
     println("Ты выбрал $userChoice. Я выбрал $gameChoice. $result")
 }
